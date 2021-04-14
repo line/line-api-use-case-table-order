@@ -1,0 +1,20 @@
+{
+    "categoryId": 5,
+    "categoryName": "本日限定品",
+    "items": [
+        {
+            "categoryId": 5,
+            "categoryName": "本日限定品",
+            "discountRate": 0,
+            "discountWay": 0,
+            "imageUrl": "https://media.istockphoto.com/photos/isolated-top-view-of-sukiyaki-hot-pot-with-boiling-vegetables-picture-id1090355486?s=2048x2048",
+            "itemDespription": "",
+            "itemId": 5001,
+            "itemName": "寄せ鍋",
+            "orderNo": 1,
+            "price": 1200,
+            "stockoutFlg": false
+        }
+    ],
+    "orderNo": 5
+}

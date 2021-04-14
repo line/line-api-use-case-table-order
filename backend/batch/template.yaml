@@ -1,0 +1,147 @@
+# Stack:LINE-UseCase-TableOrder-Batch
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  UseCase-ChannelAccessToken-Batch
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+
+Parameters:
+  Environment:
+    Type: String
+    AllowedValues:
+      - dev
+      - prod
+    Default: dev
+Mappings:
+  EnvironmentMap:
+    dev:
+      LINEChannelAccessTokenDBName: LINEChannelAccessTokenDBTableOrderDev
+      EventBridgeName: EventBridgeNameTableOrderDev
+      LayerVersion: Layer LayerVersion
+      LoggerLevel: DEBUG
+    prod:
+      LINEChannelAccessTokenDBName: LINEChannelAccessTokenDBTableOrderProd
+      EventBridgeName: EventBridgeNameTableOrderProd
+      LayerVersion: Layer LayerVersion
+      LoggerLevel: INFO or DEBUG
+
+Resources:
+  EventBridge:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Check&Update for ShortTermAccessToken
+      # EventBusName: String
+      # EventPattern: Json
+      Name: !FindInMap [EnvironmentMap, !Ref Environment, EventBridgeName]
+      # RoleArn: String
+      ScheduleExpression: cron(0 0 * * ? *)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt PutAccessToken.Arn
+          Id: TargetFunctionV1
+
+  PutAccessTokenFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref PutAccessToken
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn: !GetAtt EventBridge.Arn
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: sts:AssumeRole
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: logs:PutLogEvents
+                Resource: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/TableOrder-*:*:*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogStream
+                  - dynamodb:Scan
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                Resource:
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/TableOrder-*:*"
+                  - !GetAtt LINEChannelAccessTokenDB.Arn
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - sts:AssumeRole
+                  - ssm:GetParameters
+                Resource: "*"
+      RoleName: !Sub "${AWS::StackName}-LambdaRole"
+
+  PutAccessToken:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: update_line_access_token.lambda_handler
+      Runtime: python3.8
+      CodeUri: update_line_access_token/
+      FunctionName: !Sub TableOrder-PutAccessToken-${Environment}
+      Description: ""
+      Layers:
+        - !Join
+          - ":"
+          - - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer"
+            - !ImportValue TableOrderLayerDev
+            - !FindInMap [EnvironmentMap, !Ref Environment, LayerVersion]
+      Role: !GetAtt LambdaRole.Arn
+      Environment:
+        Variables:
+          LOGGER_LEVEL:
+            !FindInMap [EnvironmentMap, !Ref Environment, LoggerLevel]
+          CHANNEL_ACCESS_TOKEN_DB: !Ref LINEChannelAccessTokenDB
+
+  LINEChannelAccessTokenDB:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "channelId"
+          AttributeType: S
+      TableName:
+        !FindInMap [
+          EnvironmentMap,
+          !Ref Environment,
+          LINEChannelAccessTokenDBName,
+        ]
+      SSESpecification:
+        SSEEnabled: True
+      KeySchema:
+        - AttributeName: "channelId"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/
+  LambdaLayer:
+    Description: "Used Layer at Function"
+    Value: !Join
+      - ":"
+      - - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer"
+        - !ImportValue TableOrderLayerDev
+  LINEChannelAccessTokenDB:
+    Description: "DynamoDB ARN for LINEChannelAccessToken"
+    Value: !GetAtt LINEChannelAccessTokenDB.Arn

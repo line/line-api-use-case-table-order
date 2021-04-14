@@ -1,0 +1,33 @@
+{
+  "categoryId": 3,
+  "categoryName": "料理",
+  "items": [
+    {
+      "categoryId": 3,
+      "categoryName": "料理",
+      "discountRate": 10,
+      "discountWay": 2,
+      "imageUrl": "https://media.istockphoto.com/photos/japanese-fried-chicken-picture-id1150109573?s=2048x2048",
+      "itemDespription": "サクサク、ジューシーな味をお楽しみください。",
+      "itemId": 3001,
+      "itemName": "特製唐揚げ",
+      "orderNo": 1,
+      "price": 500,
+      "stockoutFlg": false
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "料理",
+      "discountRate": 20,
+      "discountWay": 1,
+      "imageUrl": "https://media.istockphoto.com/photos/french-fries-on-white-background-picture-id604378894?s=2048x2048",
+      "itemDespription": "国産じゃがいも使用。ケチャップでどうぞ。",
+      "itemId": 3002,
+      "itemName": "ポテトフライ",
+      "orderNo": 1,
+      "price": 190,
+      "stockoutFlg": false
+    }
+  ],
+  "orderNo": 4
+}

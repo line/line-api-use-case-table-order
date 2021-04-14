@@ -1,0 +1,46 @@
+{
+  "categoryId": 1,
+  "categoryName": "ドリンク",
+  "items": [
+    {
+      "categoryId": 1,
+      "categoryName": "ドリンク",
+      "discountRate": 0,
+      "discountWay": 0,
+      "imageUrl": "https://media.istockphoto.com/photos/glass-of-beer-isolated-on-white-background-picture-id862774556?s=2048x2048",
+      "itemDespription": "まずはビールから！",
+      "itemId": 1001,
+      "itemName": "生ビール",
+      "orderNo": 1,
+      "price": 300,
+      "stockoutFlg": false
+    },
+    {
+      "categoryId": 1,
+      "categoryName": "ドリンク",
+      "discountRate": 0,
+      "discountWay": 0,
+      "imageUrl": "https://media.istockphoto.com/photos/glass-of-gin-tonic-picture-id803905662?s=2048x2048",
+      "itemDespription": "フルーティーで優しい口当たり。",
+      "itemId": 1002,
+      "itemName": "特製カクテル",
+      "orderNo": 2,
+      "price": 350,
+      "stockoutFlg": false
+    },
+    {
+      "categoryId": 1,
+      "categoryName": "ドリンク",
+      "discountRate": 0,
+      "discountWay": 0,
+      "imageUrl": "https://media.istockphoto.com/photos/cola-with-crushed-ice-and-straw-in-tall-glass-picture-id681018122?s=2048x2048",
+      "itemDespription": "",
+      "itemId": 1003,
+      "itemName": "コーラ",
+      "orderNo": 3,
+      "price": 200,
+      "stockoutFlg": false
+    }
+  ],
+  "orderNo": 2
+}

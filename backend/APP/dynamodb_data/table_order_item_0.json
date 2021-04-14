@@ -1,0 +1,46 @@
+{
+  "categoryId": 0,
+  "categoryName": "オススメ",
+  "items": [
+    {
+      "categoryId": 0,
+      "categoryName": "オススメ",
+      "discountRate": 20,
+      "discountWay": 1,
+      "imageUrl": "https://media.istockphoto.com/photos/french-fries-on-white-background-picture-id604378894?s=2048x2048",
+      "itemDespription": "国産じゃがいも使用。ケチャップでどうぞ。",
+      "itemId": 1,
+      "itemName": "ポテトフライ",
+      "orderNo": 1,
+      "price": 190,
+      "stockoutFlg": false
+    },
+    {
+      "categoryId": 0,
+      "categoryName": "オススメ",
+      "discountRate": 10,
+      "discountWay": 2,
+      "imageUrl": "https://media.istockphoto.com/photos/japanese-fried-chicken-picture-id1150109573?s=2048x2048",
+      "itemDespription": "サクサク、ジューシーな味をお楽しみください。",
+      "itemId": 2,
+      "itemName": "特製唐揚げ",
+      "orderNo": 1,
+      "price": 500,
+      "stockoutFlg": false
+    },
+    {
+      "categoryId": 0,
+      "categoryName": "オススメ",
+      "discountRate": 0,
+      "discountWay": 0,
+      "imageUrl": "https://media.istockphoto.com/photos/green-salad-with-fresh-vegetables-picture-id953810510?s=2048x2048",
+      "itemDespription": "人気のサラダです。",
+      "itemId": 3,
+      "itemName": "グリーンサラダ",
+      "orderNo": 1,
+      "price": 390,
+      "stockoutFlg": false
+    }
+  ],
+  "orderNo": 1
+}
