@@ -8,7 +8,7 @@ Set the endpoint URL of the LIFF app created in [Create LINE channel > Add LIFF 
 1. In the [LINE Developers Console](https://developers.line.biz/console/), go to the LIFF app page created in [Create LINE channel > Add LIFF app].
 ![LIFF console](../images/en/liff-console-en.png)
 
-1. Click the Edit button of the Endpoint URL.
+1. Click the Edit button of the Endpoint URL.  
 ![Edit the endpoint URL](../images/en/end-point-url-editing-en.png)
 
 1. Enter the CloudFrontDomainName that you took a note of in the [Building the backend > Deploying the application (APP)] procedure with https:// at the beginning, and then click Update.
