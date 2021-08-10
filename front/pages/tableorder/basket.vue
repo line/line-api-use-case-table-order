@@ -45,9 +45,7 @@
                             outlined
                             height="56"
                             min="0"
-                            max="99"
                             v-model="order.count"
-                            oninput="if(Number(this.value) < Number(this.min)) this.value = this.min;if(Number(this.value) > Number(this.max)) this.value = this.max;"
                             v-on:change="modify(order)"
                         ></v-text-field>
                     </div>
@@ -190,7 +188,7 @@ export default {
         orderEnabled() {
             // 注文ボタン活性制御
             for(const orderNo in this.orders) {
-                if(this.orders[orderNo].count === 0) {
+                if(this.orders[orderNo].count < 1) {
                     return false;
                 }
             }
@@ -256,9 +254,13 @@ export default {
          * @param {Object} order 商品情報
          */
         modify(order) {
-            if ( order.count <= 0 || isNaN(order.count) ) {
+            if(Number(order.count) > 99) {
+                order.count = 99;
+            }
+            if ( order.count < 1 || isNaN(order.count) ) {
                 order.count = 1;
             }
+            order.count = Math.floor(order.count)
             
             const categoryId = order.categoryId;
             const itemId = order.itemId;

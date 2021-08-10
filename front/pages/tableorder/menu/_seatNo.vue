@@ -143,12 +143,14 @@
                 <v-card-title class="justify-center">{{ $t("menu.msg009") }}</v-card-title>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-text-field 
-                        regular
-                        v-bind:label="$t('menu.msg010')" 
-                        v-bind:rules="[required, numberOnly]"
-                        class="mr-3 mt-3" style="width: 50px;" 
-                        v-model="seatNo"></v-text-field>
+                    <v-form ref="seatNoForm">
+                        <v-text-field 
+                            regular
+                            v-bind:label="$t('menu.msg010')" 
+                            v-bind:rules="[required, numberOnly]"
+                            class="mr-3 mt-3" style="width: 100px;" 
+                            v-model="seatNo"></v-text-field>
+                    </v-form>
                     <v-btn tile color="#00B900" class="px-5 white--text text-body-1 font-weight-bold" v-on:click="setSeatNo()">{{ $t("menu.msg011") }}</v-btn>
                     <v-spacer></v-spacer>
                 </v-card-actions>
@@ -284,11 +286,11 @@ export default {
          * 
          */
         setSeatNo() {
-            if (!String(this.customer.seatNo).match(/^[0-9]*$/g)) {
-                this.seatNoModal = true;
+            if (this.$refs.seatNoForm.validate()) {
+                this.seatNoModal = false;
                 return;
             }
-            this.seatNoModal = false;
+            this.seatNoModal = true;
         },
         /**
          * 商品カテゴリー検索
