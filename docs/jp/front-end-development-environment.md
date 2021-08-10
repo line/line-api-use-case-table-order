@@ -24,13 +24,13 @@
     - `BASE_URL` には AWS APIGateway の URL を設定
     - `APIGATEWAY_STAGE` には AWS APIGateway のステージ名を設定
     - `AJAX_MODULE` には Ajax 通信の時に使用するモジュール（ Amplify API は "amplify" ／ Axios は "axios" ）を設定
-    
+
 - node_modules インストール
 
     front プロジェクトに Node.js の依存パッケージ(※ node_modules フォルダ)がインストールされていない場合、 front フォルダー直下で以下のコマンドを実行して node_modules をインストールしてください。
     ```
     npm install
-    ``` 
+    ```
     もしくは
     ```
     yarn install
@@ -38,7 +38,7 @@
     インストールが完了したら front/`node_modules` フォルダが生成されています。
 
 - LIFF アプリのエンドポイントURLの修正
-    
+
     ローカル開発環境の Web サーバーで開発する為、 LINE チャネルの LIFF アプリの`エンドポイントURL`を以下の URL に変更してください（※開発完了後 CloudFront の URL に戻してください）。
     ```
     https://localhost:3000
@@ -95,4 +95,4 @@
 
 [次の頁へ](test-data-charge.md)
 
-[目次へ戻る](../README.md)
+[目次へ戻る](../../README.md)

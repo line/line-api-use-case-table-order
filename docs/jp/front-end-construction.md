@@ -4,7 +4,7 @@
     front/.env ファイルの `LIFF_ID` に LIFF アプリの LIFF ID を、`BASE_URL` に AWS APIGateway の URL を、`APIGATEWAY_STAGE`に AWS APIGateway のステージ名を設定してください。
 
     ▼ .env ファイル
-    ```` 
+    ````
     # LIFF ID
     LIFF_ID=9999999999-xxxxxxxx
 
@@ -23,7 +23,7 @@
     front プロジェクトに Node.js の依存パッケージ(※ node_modules フォルダ)がインストールされていない場合、front フォルダー直下で以下のコマンドを実行して node_modules をインストールしてください。
     ```
     npm install
-    ``` 
+    ```
     もしくは
     ```
     yarn install
@@ -48,4 +48,4 @@
 
 [次の頁へ](test-data-charge.md)
 
-[目次へ戻る](../README.md)
+[目次へ戻る](../../README.md)
