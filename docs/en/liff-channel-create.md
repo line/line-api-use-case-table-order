@@ -39,11 +39,11 @@ A provider is a team, company, or individual that manages multiple channels. Pro
 
 1. While logged in to LINE Developers, access the LINE Developers Console.
    https://developers.line.biz/console/
-2. Click the Create button next to Provider.
+2. Click the Create button next to Provider.  
    ![Creating a provider_1_ Image of the created part surrounded by a square](../images/en/line-provider-create-1-en.png)
 3. Enter a provider name and click Create.
 4. Confirm that the provider has been created and that your see this screen.
-   ![Creating a Provider_2](../images/en/line-provider-create-2.png)
+   ![Creating a Provider_2](../images/en/line-provider-create-2-en.png)
 
 ## 4. Create a channel
 
